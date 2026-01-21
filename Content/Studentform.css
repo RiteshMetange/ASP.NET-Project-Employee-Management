@@ -1,0 +1,117 @@
+﻿/* ===== PAGE BACKGROUND ===== */
+body {
+    font-family: Bahnschrift, Arial, sans-serif;
+    background-color: antiquewhite; /* light cream */
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 25px;
+}
+
+/* ===== FORM / TABLE (SEMI BLACK TRANSPARENT) ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.65); /* semi-black */
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    padding: 15px;
+}
+
+/* Table cells */
+td {
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+/* ===== TEXTBOX ===== */
+.input-text {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+}
+
+    .input-text:hover {
+        box-shadow: 0px 6px 8px rgba(255, 255, 255, 0.2);
+    }
+
+/* ===== GRIDVIEW ===== */
+#GridView1 {
+    margin-top: 25px;
+    text-align: center;
+    font-family: Bahnschrift;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+}
+
+    #GridView1 th {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: #f6f1e7;
+        padding: 10px;
+        
+    }
+
+    #GridView1 td {
+        padding: 8px;
+    }
+
+/* ===== BUTTONS ===== */
+.btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    float: right;
+}
+
+    .btn-add:hover {
+        box-shadow: 0px 5px 10px #28a745;
+    }
+
+.btn-clear {
+    background-color: #dc3545;
+    color: white;
+}
+
+    .btn-clear:hover {
+        box-shadow: 0px 5px 10px #dc3545;
+    }
+
+.btn-export {
+    background-color: #007bff;
+    color: white;
+}
+
+    .btn-export:hover {
+        box-shadow: 0px 5px 10px #007bff;
+    }
+
+
+
+span {
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 5px;
+    color:indianred;
+}
