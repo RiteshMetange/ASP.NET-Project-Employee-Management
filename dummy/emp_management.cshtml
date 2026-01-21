@@ -1,0 +1,537 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Studentform.aspx.cs" Inherits="Demo2.Studentform" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head runat="server">
+      <title>Employee Management System </title>
+      <link rel="stylesheet" href="emp_management.css" />
+      <style>
+         #search , #search2 {
+         font-family: monospace;
+         font-size: 17px;
+         text-align: center;
+         font-weight: bolder;
+         }
+         #search2{
+              margin-left: 291px;
+         }
+
+
+
+
+#lasdnf{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    align-content:center;
+}
+
+         #export{
+            
+    
+    font-weight: bold;
+    background-color:transparent;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    color:black;
+    width:80px;
+    height:30px;
+}
+
+    #export:hover {
+        color: red;
+        box-shadow: 0px 5px 5px #00BFFF;
+    }
+
+         #rax{
+             display:flex;
+             justify-content:center;
+             align-content:center;
+         }
+                
+          .auto-style7 {
+              margin-top: 35px;
+          }
+                
+          .auto-style8 {
+              margin-top: 19px;
+          }
+                #loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loadingSpinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+         #export0{
+            
+    
+    font-weight: bold;
+    background-color:transparent;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    color:black;
+    width:80px;
+    height:30px;
+}
+
+          .auto-style9 {
+              margin-left: 0px;
+          }
+          .auto-style10 {
+              margin-left: 32px;
+          }
+
+         #export0{
+            
+    
+    font-weight: bold;
+    background-color:transparent;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    color:black;
+    width:80px;
+    height:30px;
+}
+
+         #export0{
+            
+    
+    font-weight: bold;
+    background-color:transparent;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    color:black;
+    width:80px;
+    height:30px;
+}
+
+      </style>
+
+      <script>
+function validateAlphabets(event) {
+    var userInput = document.getElementById('<%= TextBox1.ClientID %>').value;
+
+    // alphabets
+    if (userInput.length > 0 && !/^[a-zA-Z]+$/.test(userInput)) {
+        document.getElementById('<%= TextBox1.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+    }
+}
+
+
+function ValidateAlphabets(event) {
+    var userInput = document.getElementById('<%= TextBox1.ClientID %>').value;
+
+    // alphabets
+    if (userInput.length > 0 && !/^[a-zA-Z]+$/.test(userInput)) {
+
+        document.getElementById('<%= TextBox1.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+
+    }
+}
+
+function one(event) {
+    var userInput = document.getElementById('<%= TextBox6.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[a-zA-Z]+$/.test(userInput)) {
+        document.getElementById('<%= TextBox6.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+    }
+}
+
+
+function two(event) {
+    var userInput = document.getElementById('<%= TextBox7.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[a-zA-Z\s]+$/.test(userInput)) {
+        document.getElementById('<%= TextBox7.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+    }
+}
+
+
+function three(event) {
+    var userInput = document.getElementById('<%= TextBox8.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[1-9]\d*$/.test(userInput)) {
+        document.getElementById('<%= TextBox8.ClientID %>').value = "Enter Numbers Only";
+        return false;
+
+
+
+    }
+}
+
+
+
+function four(event) {
+    var userInput = document.getElementById('<%= TextBox3.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[a-zA-Z]+$/.test(userInput)) {
+        document.getElementById('<%= TextBox3.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+    }
+
+}
+
+function five(event) {
+    var userInput = document.getElementById('<%= TextBox4.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[1-9]\d*$/.test(userInput)) {
+        document.getElementById('<%= TextBox4.ClientID %>').value = "Enter Numbers Only";
+        return false;
+
+    }
+}
+
+
+
+function txt10(event) {
+    var userInput = document.getElementById('<%= TextBox10.ClientID %>').value;
+
+    if (userInput.length > 0 && !/^[a-zA-Z]+$/.test(userInput)) {
+        document.getElementById('<%= TextBox10.ClientID %>').value = "Enter Alphabets Only";
+        return false;
+    }
+
+}
+
+
+function searchEmployee() {
+    var input = document.getElementById('<%= search.ClientID %>').value.toLowerCase();
+    var gridView = document.getElementById('<%= GridView1.ClientID %>');
+    var rows = gridView.getElementsByTagName('tr');
+
+    for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        var found = false;
+
+        for (var j = 0; j < cells.length; j++) {
+            var cellValue = cells[j].innerText.toLowerCase();
+
+            if (cellValue.includes(input)) {
+                found = true;
+                break;
+            }
+            else {
+                rows[i].style.display = "none";
+            }
+           
+            
+        }
+
+        rows[i].style.display = found ? '' : 'none';
+        rows[i].style.backgroundColor = found ? '#00BFFF' : '';
+
+       
+    }
+}
+
+
+          function searchEmployee2() {
+               var input = document.getElementById('<%= search.ClientID %>').value.toLowerCase();
+              var gridView = document.getElementById('<%= GridView1.ClientID %>');
+               var rows = gridView.getElementsByTagName('tr');
+
+              var  filter, td, tr, a, i, txtValue;
+           
+              filter = input.value.toUpperCase();
+              tr = document.getElementById("tr");
+              td = ul.getElementsByTagName("td");
+              for (i = 0; i < td.length; i++) {
+                  a = td[i].getElementsByTagName("a")[0];
+                  txtValue = a.textContent || a.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      li[i].style.display = "";
+                  } else {
+                      li[i].style.display = "none";
+                  }
+              }
+          }
+                                       
+
+              function showLoadingAnimation() {
+  
+  var loadingOverlay = document.createElement("div");
+  loadingOverlay.id = "loadingOverlay";
+  var loadingSpinner = document.createElement("div");
+  loadingSpinner.classList.add("loadingSpinner");
+  loadingOverlay.appendChild(loadingSpinner);
+  document.body.appendChild(loadingOverlay);
+  
+  
+  var button = document.getElementById("<%= Button1.ClientID %>");
+  button.disabled = true;
+  
+  
+   setTimeout(function() {
+     button.disabled = false;
+     document.body.removeChild(loadingOverlay);
+   }, 5000);
+}
+
+
+          
+
+function redirectToLogin() {
+    window.location.href = 'login.aspx';
+}
+
+   
+         
+           
+      </script>
+   </head>
+   <body style="margin-top: 45px">
+      <form id="form1" runat="server">
+           <span id="timer"></span>
+           <%--  TMX LOGO --%>
+         <div class="container">
+            <div id="items-0"><img src="https://www.thermaxglobal.com/wp-content/themes/thermax/img/common_svg/logo-red.svg" width="80px" alt="TMX Global" />
+              
+                
+             </div>
+         </div>
+           <%-- end --%><%-- BACKGROUND --%>
+ <img class="background" src="back2.jpg" alt="none" style="left: 0px; top: 0px" />
+             
+         <%-- FORM  --%>    
+          <center>
+            <div class="auto-style14" id="mainbody">
+               <div id="lasdnf">
+
+                   <asp:Timer ID="Timer1" runat="server" Interval="120000" OnTick="Timer1_Tick"></asp:Timer>
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+                  <table class="auto-style9" border="0" >
+                      <%-- Caption --%>
+                     <caption style="padding: 10px; font-family: Bahnschrift; font-size: x-large;  font-style: normal; font-variant: normal; text-transform: uppercase; font-weight: bold; color: #FFFFFF; background-color: #000000;" class="auto-style26">Employee Management System</caption>
+                     <tr>
+                        <td class="auto-style13" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <strong>
+                              <asp:Label ID="Label1" runat="server" Text="First Name" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style25">
+                           <asp:TextBox ID="TextBox1" runat="server"   onkeypress="return ValidateAlphabets(event)"           CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter First Name" BorderColor="White" MaxLength="20" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator1"  ControlToValidate="TextBox1" runat="server" ErrorMessage=" Please Enter Name" ForeColor="White" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ErrorMessage="Please Enter First Name Without WhiteSpaces "  Display="Dynamic" ControlToValidate="TextBox1" ForeColor="Red" ValidationExpression="^[A-Za-z]+$"></asp:RegularExpressionValidator>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style19">
+                           <strong>
+                              <asp:Label ID="Label6" runat="server" Text="Last Name" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style11">
+                           <asp:TextBox ID="TextBox6" runat="server" onkeypress="return one(event)" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Last Name" AutoCompleteType="Cellular" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator6"  ControlToValidate="TextBox6" runat="server" ErrorMessage="Please Enter Last Name" ForeColor="White" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server" ErrorMessage="Please Enter Last Name Only"  Display="Dynamic" ControlToValidate="TextBox6" ForeColor="Red" ValidationExpression="^[A-Za-z\s]+$"></asp:RegularExpressionValidator>
+                        </td>
+                     </tr>
+                      <%-- NAME --%>
+                     <tr>
+                        <td class="auto-style13" id="cols" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <strong>
+                              <asp:Label ID="Label2" runat="server" Text="Employee ID" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style25">
+                           <asp:TextBox ID="TextBox2" runat="server" onkeypress="return txttwo(event)" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter ID" OnTextChanged="TextBox2_TextChanged" MaxLength="4"></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator2"   ControlToValidate="TextBox1" runat="server" ErrorMessage="Please Enter Employee ID  " ForeColor="White" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please Enter AlphaNumeric ID"  Display="Dynamic" ControlToValidate="TextBox2" ForeColor="Red" ValidationExpression="^[a-zA-Z]\d+$"></asp:RegularExpressionValidator>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style19">
+                           <strong>
+                              <asp:Label ID="Label7" runat="server" Text="Address" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style11">
+                           <asp:TextBox ID="TextBox7" runat="server" CssClass="stylish-textbox" Height="20px" Width="200px" onkeypress="return two(event)" Placeholder="Enter Address" AutoCompleteType="Cellular" MaxLength="50" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator7"  ControlToValidate="TextBox7" runat="server" ErrorMessage="Please Enter Address" ForeColor="White"  Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" ErrorMessage="Please Enter Alphabets Only"  Display="Dynamic" ControlToValidate="TextBox7" ForeColor="Red" ValidationExpression="^[A-Za-z\s]+$"></asp:RegularExpressionValidator>
+                        </td>
+                     </tr>
+                      <%-- ID --%>
+                     <tr>
+                        <td class="auto-style13" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <strong>
+                              <asp:Label ID="Label3" runat="server" Text="Department" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style25">
+                           <asp:TextBox ID="TextBox3" runat="server" onkeypress="return four(event)" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Department" MaxLength="15" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator3"  ControlToValidate="TextBox1" runat="server" ErrorMessage="Please Enter Department" ForeColor="White" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="Please Enter Valid Department"  Display="Dynamic" ControlToValidate="TextBox3" ForeColor="Red" ValidationExpression="[A-Za-z\s]+"></asp:RegularExpressionValidator>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style19">
+                           <strong>
+                              <asp:Label ID="Label8" runat="server" Text="Pincode" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style11">
+                           <asp:TextBox ID="TextBox8" runat="server" CssClass="stylish-textbox" Height="20px" Width="200px" onkeypress="return three(event)" Placeholder="Enter Pincode" AutoCompleteType="Cellular" MaxLength="6" OnTextChanged="TextBox8_TextChanged" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator8"  ControlToValidate="TextBox8" runat="server" ErrorMessage="Please Enter Pincode" ForeColor="White" OnDataBinding="TextBox4_TextChanged1" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ErrorMessage="Please Enter 6 Digit Pincode"  Display="Dynamic" ControlToValidate="TextBox8" ForeColor="Red" ValidationExpression="^\d{6}$"></asp:RegularExpressionValidator>
+                        </td>
+                     </tr>
+                      <%-- DEPARTMENT --%>
+                     <tr>
+                        <td class="auto-style21" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <strong>
+                              <asp:Label ID="Label4" runat="server" Text="Mobile No." ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style22">
+                           <asp:TextBox ID="TextBox4" runat="server" onkeypress="return five(event)" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Mobile No" OnTextChanged="TextBox4_TextChanged1" MaxLength="10" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator4"  ControlToValidate="TextBox1" runat="server" ErrorMessage="Please Enter Mobile No" ForeColor="White" Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Please Enter 10 Digit Mobile "  Display="Dynamic" ControlToValidate="TextBox4" ForeColor="Red" ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style23">
+                           <strong>
+                              <asp:Label ID="Label9" runat="server" Text="Date of Joining" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style24">
+                           <asp:TextBox ID="TextBox9" runat="server" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Date of Joining" AutoCompleteType="Cellular" OnTextChanged="TextBox9_TextChanged" MaxLength="10" ></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator9"  ControlToValidate="TextBox9" runat="server" ErrorMessage="Please Enter Date of Joining" ForeColor="White"  Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="Please Enter a valid date (DD-MM-YYYY)"  Display="Dynamic" ControlToValidate="TextBox9" ForeColor="Red" ValidationExpression="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"></asp:RegularExpressionValidator>
+                        </td>
+                     </tr>
+                      <%-- MObile --%>
+                     <tr>
+                        <td class="auto-style15" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <strong>
+                              <asp:Label ID="Label5" runat="server" Text="Email ID" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style18">
+                           <asp:TextBox ID="TextBox5" runat="server" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Email ID" AutoCompleteType="Cellular" OnTextChanged="TextBox5_TextChanged" MaxLength="30">@thermaxglobal.com</asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator5"  ControlToValidate="TextBox1" runat="server" ErrorMessage="Please Enter Email" ForeColor="White"  Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style20">
+                           <strong>
+                              <asp:Label ID="Label10" runat="server" Text="Town/City" ForeColor="White"></asp:Label>
+                           </strong>
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" class="auto-style16">
+                           <asp:TextBox ID="TextBox10" runat="server" onkeypress="return txt10(event)" CssClass="stylish-textbox" Height="20px" Width="200px" Placeholder="Enter Town/City" AutoCompleteType="Cellular" MaxLength="10"></asp:TextBox>
+                           <asp:RequiredFieldValidator ID="RequiredFieldValidator10"  ControlToValidate="TextBox10" runat="server" ErrorMessage="Please Enter Town/City" ForeColor="White"  Display="Dynamic"></asp:RequiredFieldValidator>
+                           <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ErrorMessage="Please Enter Alphabets Only"  Display="Dynamic" ControlToValidate="TextBox10" ForeColor="Red" ValidationExpression="^[A-Za-z\s]+$"></asp:RegularExpressionValidator>
+                        </td>
+                     </tr>
+                      <%-- Email --%>
+                     <tr>
+                        <td class="auto-style13" style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;">
+                           <asp:Button ID="Button1" runat="server" Text="Clear" Width="87px" OnClick="Button1_Click" BackColor="#FF3300" BorderColor="Black" ForeColor="White" Height="30px" CssClass="auto-style6" />
+                        </td>
+                        <td style="padding: 10px; margin: 10px; background-color: rgba(0, 0, 0, 0.736); font-family: Calibri; font-size: medium;" colspan="3">
+                           <asp:Button ID="AddEmpDetails" runat="server" OnClick="AddEmpDetails_Click" Text="Submit" BackColor="#99FF33" BorderColor="Black" ForeColor="Black" Height="30px" Width="87px" />
+                              
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <br />
+         </center>
+         <center>
+             <%-- search  --%>
+            <div class="searchbar">
+               <p class="auto-style7">
+                  <asp:TextBox ID="search" runat="server" Width="236px" Placeholder="&#128269; Search By ID" Columns="1" CssClass="stylish-textbox" BorderColor="White" ForeColor="White" onkeyup="searchEmployee()" AutoPostBack="false"></asp:TextBox>
+                    <asp:TextBox ID="search2" runat="server" onkeyup="searchEmployee2" Width="235px" Placeholder="&#128269; Search By Department" Columns="1" CssClass="stylish-textbox" BorderColor="White" ForeColor="White"  AutoPostBack="false"></asp:TextBox>
+               </p>
+                <div id="rax">
+
+                    <asp:Button ID="export" runat="server" Text="Export" OnClick="export_Click" OnClientClick="showLoadingAnimation()" ToolTip="Export The Data To Excel Application" Height="30px" Width="87px" BorderStyle="Double" CssClass="auto-style10" />
+
+                </div>
+            </div>
+             <%-- Grid view  --%>
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" CssClass="auto-style8" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="1512px" PageSize="4" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AllowSorting="True">
+               <AlternatingRowStyle BackColor="#CCCCCC" />
+
+               <Columns>
+                  <asp:CommandField ShowEditButton="true" ShowDeleteButton="true" HeaderText="Operation" ItemStyle-Width="120px" >
+                     <ItemStyle Width="120px"></ItemStyle>
+                  </asp:CommandField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Emp Id" DataField="EmpId">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="First Name" DataField="EmpName">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Last Name" DataField="LastName">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Department" DataField="DeptName">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Mobile" DataField="Mobile">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Email ID" DataField="EmailID">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Address" DataField="Address">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Pincode" DataField="Pincode">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Date of joining" DataField="Doj">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:BoundField HeaderStyle-Width="120px" HeaderText="Town/City" DataField="Town">
+                     <HeaderStyle Width="120px"></HeaderStyle>
+                  </asp:BoundField>
+                  <asp:CommandField ButtonType="Button"  HeaderText="Select" ShowSelectButton="true" ShowHeader="True" />
+                 
+                    
+               </Columns>
+               <FooterStyle BackColor="#CCCCCC" />
+               <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerSettings  Mode="Numeric" NextPageText=""  PageButtonCount="10" />
+               <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+               <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+               <SortedAscendingCellStyle BackColor="#F1F1F1" />
+               <SortedAscendingHeaderStyle BackColor="#808080" />
+               <SortedDescendingCellStyle BackColor="#CAC9C9" />
+               <SortedDescendingHeaderStyle BackColor="#383838" />
+              
+            </asp:GridView>
+             <br />
+         </center>
+      </form>
+   </body>
+</html>

@@ -1,0 +1,211 @@
+
+img.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    left: 0px;
+    top: 0px;
+    filter: blur(10px);
+}
+
+.stylish-textbox:hover {
+    box-shadow: 0px 10px 12px white;
+}
+    
+.container img {
+    animation: rotate 5s infinite linear;
+    transform-style: preserve-3d;
+    cursor: none;
+}
+
+
+#GridView1 {
+    font-family: Bahnschrift;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    10% {
+        transform: rotateY(10deg);
+    }
+
+    20% {
+        transform: rotateY(20deg);
+    }
+
+    30% {
+        transform: rotateY(30deg);
+    }
+
+    40% {
+        transform: rotateY(40deg);
+    }
+
+    50% {
+        transform: rotateY(50deg);
+    }
+
+    60% {
+        transform: rotateY(-50deg);
+    }
+
+    70% {
+        transform: rotateY(-40deg);
+    }
+
+    80% {
+        transform: rotateY(-30deg);
+    }
+
+    90% {
+        transform: rotateY(-20deg);
+    }
+
+    95% {
+        transform: rotateY(-10deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+}
+
+.auto-style1 {
+    height: 496px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.auto-style2 {
+    width: 465px;
+    height: 50px;
+}
+
+
+.auto-style3 {
+    width: 215px;
+}
+
+#dataTable {
+    width: 100%;
+}
+
+#cols {
+    background-color: transparent;
+}
+
+
+#dataTable th,
+td {
+    padding: 8px;
+    font-weight: bolder;
+    font-size: 20px;
+    color: black;
+}
+
+
+#dataTable th {
+    color: black;
+}
+
+#GridView1 {
+    text-align: center;
+}
+
+.auto-style5 {
+    width: 446px;
+}
+
+span {
+    font-size: 20px;
+}
+
+/*    Submit */
+#Button2 {
+    float: left;
+    font-weight: bold;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+    #Button2:hover {
+        color: white;
+        box-shadow: 0px 5px 5px greenyellow;
+    }
+
+#Button1 {
+    font-weight: bold;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+    #Button1:hover {
+        color: black;
+        box-shadow: 0px 5px 5px red;
+    }
+
+#s {
+    font-weight: bold;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    color: white;
+    background-color:blue;
+}
+
+    #s:hover {
+        color: black;
+        box-shadow: 0px 5px 5px blue;
+    }
+
+
+#AddEmpDetails {
+    font-weight: bold;
+    font-size: 17px;
+    font-family: Bahnschrift;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    float: right;
+}
+    #AddEmpDetails:hover {
+        color: black;
+        box-shadow: 0px 5px 5px greenyellow;
+    }
+
+
+
+.stylish-textbox {
+    color: white;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    font-weight: bold;
+    transition: border-bottom-color 3s ease;
+    outline: none;
+}
+
+    
+    table {
+        box-shadow: 0 0 70px black;
+    }
+
+
+.auto-style6 {
+    margin-top: 0px;
+}
+
