@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,12 +15,26 @@ namespace EmployeeManagement
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["User"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 DefaultEmpRecord();
                 TextBox5.Text = "@thermaxglobal.com";
             }
+
+
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
         }
+
+
+
 
         public override void VerifyRenderingInServerForm(Control control)
         {
@@ -105,18 +120,73 @@ namespace EmployeeManagement
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+
         {
+            DataTable table = (DataTable)ViewState["EmployeeDetails"];
+
+            if (table == null) return;
+
+            GridViewRow row = GridView1.Rows[e.RowIndex];
+
+            // Update values (BoundFields use Controls[0])
+            table.Rows[e.RowIndex]["EmpId"] =
+                ((TextBox)row.Cells[1].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["EmpName"] =
+                ((TextBox)row.Cells[2].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["LastName"] =
+                ((TextBox)row.Cells[3].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["DeptName"] =
+                ((TextBox)row.Cells[4].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["Mobile"] =
+                ((TextBox)row.Cells[5].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["EmailID"] =
+                ((TextBox)row.Cells[6].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["Address"] =
+                ((TextBox)row.Cells[7].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["Pincode"] =
+                ((TextBox)row.Cells[8].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["Doj"] =
+                ((TextBox)row.Cells[9].Controls[0]).Text;
+
+            table.Rows[e.RowIndex]["Town"] =
+                ((TextBox)row.Cells[10].Controls[0]).Text;
+
+            // Exit edit mode
             GridView1.EditIndex = -1;
-            BindEmpDetails();
+
+            // Save and rebind
+            ViewState["EmployeeDetails"] = table;
+            GridView1.DataSource = table;
+            GridView1.DataBind();
         }
+
+
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             DataTable table = (DataTable)ViewState["EmployeeDetails"];
-            table.Rows.RemoveAt(e.RowIndex);
-            GridView1.DataSource = table;
-            GridView1.DataBind();
+            if (table == null) return;
+
+            int rowIndex = e.RowIndex + (GridView1.PageIndex * GridView1.PageSize);
+
+            if (rowIndex >= 0 && rowIndex < table.Rows.Count)
+            {
+                table.Rows.RemoveAt(rowIndex);
+            }
+
+            ViewState["EmployeeDetails"] = table;
+            GridView1.EditIndex = -1;
+            BindEmpDetails();
         }
+
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -201,73 +271,53 @@ namespace EmployeeManagement
         }
         protected void Export()
         {
+            DataTable table = ViewState["EmployeeDetails"] as DataTable;
+
+            if (table == null || table.Rows.Count == 0)
+            {
+                ScriptManager.RegisterStartupScript(
+                    this, GetType(), "alert",
+                    "alert('No records to export');", true);
+                return;
+            }
+
+            // REMOVE empty first row (important)
+            for (int i = table.Rows.Count - 1; i >= 0; i--)
+            {
+                if (string.IsNullOrWhiteSpace(table.Rows[i]["EmpId"].ToString()))
+                {
+                    table.Rows.RemoveAt(i);
+                }
+            }
 
             Workbook workbook = new Workbook();
-            DataTable dataTable = new DataTable();
-            foreach (TableCell cell in GridView1.HeaderRow.Cells)
-            {
-
-                dataTable.Columns.Add(cell.Text);
-            }
-
-            foreach (GridViewRow gridViewRow in GridView1.Rows)
-            {
-
-                DataRow dataRow = dataTable.NewRow();
-                for (int i = 0; i < gridViewRow.Cells.Count; i++)
-                {
-                    dataRow[i] = gridViewRow.Cells[i].Text;
-                }
-                dataTable.Rows.Add(dataRow);
-            }
-
             Worksheet worksheet = workbook.Worksheets[0];
-            CellRange range = worksheet.Range["A1:L1"];
 
-            range.ColumnWidth = 20;
-            range.Style.Borders[BordersLineType.EdgeTop].LineStyle = LineStyleType.Thin;
-            range.Style.Borders[BordersLineType.EdgeTop].Color = Color.Black;
-            range.Style.Borders[BordersLineType.EdgeBottom].LineStyle = LineStyleType.Thin;
-            range.Style.Borders[BordersLineType.EdgeBottom].Color = Color.Black;
-            range.Style.Borders[BordersLineType.EdgeLeft].LineStyle = LineStyleType.Thin;
-            range.Style.Borders[BordersLineType.EdgeLeft].Color = Color.Black;
-            range.Style.Borders[BordersLineType.EdgeRight].LineStyle = LineStyleType.Thin;
-            range.Style.Borders[BordersLineType.EdgeRight].Color = Color.Black;
-            worksheet.InsertDataTable(dataTable, true, 1, 1);
+            worksheet.InsertDataTable(table, true, 1, 1);
+            worksheet.AllocatedRange.AutoFitColumns();
 
-            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            String file = "C:\\Downloads";
-            string fileName = file + timestamp + ".xlsx";
+            // ✅ SAFE export folder (Desktop instead of C:\)
+            string folderPath =
+                Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                + @"\EmployeeExports\";
+
+            if (!System.IO.Directory.Exists(folderPath))
+            {
+                System.IO.Directory.CreateDirectory(folderPath);
+            }
+
+            string fileName = folderPath +
+                "EmployeeData_" +
+                DateTime.Now.ToString("yyyyMMddHHmmss") +
+                ".xlsx";
 
             workbook.SaveToFile(fileName, ExcelVersion.Version2013);
 
+            ScriptManager.RegisterStartupScript(
+                this, GetType(), "alert",
+                $"alert('Export successful! File saved to Desktop');", true);
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            int remainingTime = Timer1.Interval / 1000;
-
-            if (remainingTime == 300)
-            {
-                // Display alert code (e.g., JavaScript alert)
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('1 minute remaining , Save Your Details');", true);
-            }
-
-            if (remainingTime <= 60)
-            {
-
-                Response.Redirect("login.aspx");
-            }
-
-        }
-
-
-
-        //protected void search2_TextChanged(object sender, EventArgs e)
-        //{
-        //    string keyword = search2.Text;
-        //    BindEmpDetails();
-        //}
 
     }
 }

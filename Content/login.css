@@ -1,0 +1,169 @@
+﻿/* EMPLOYEE MANAGEMENT SYSTEM - PROFESSIONAL GLASS UI
+   --------------------------------------------------
+   Style Guide: iPhone/iOS Glassmorphism
+   Font: 'Inter' (San Francisco alternative)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* --- 1. BODY & BACKGROUND --- */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    /* Professional Office/City Background */
+    background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    /* Center content like your original file, but allow scroll for large tables */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Dark overlay to ensure text is readable on any background */
+    position: relative;
+    z-index: 0;
+}
+
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%);
+        z-index: -1;
+    }
+
+/* --- 2. THE GLASS LOGIN BOX (Your Original Class Upgraded) --- */
+.login-box {
+    /* The Core iPhone/Glass Effect */
+    background: rgba(255, 255, 255, 0.08); /* Extremely transparent */
+    backdrop-filter: blur(25px); /* Heavy iOS Blur */
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle white border */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Deep shadow */
+
+    padding: 40px;
+    width: 350px; /* Slightly wider for modern feel */
+    border-radius: 24px; /* Smoother, Apple-like corners */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+    .login-box:hover {
+        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .login-box h2 {
+        margin-bottom: 30px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+/* --- 3. INPUT FIELDS (Outstanding Form Style) --- */
+.input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 12px 0;
+    /* Dark Glass Input Style */
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; /* Matches button radius */
+
+    color: white;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+    .input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Glow effect on focus */
+    .input:focus {
+        background: rgba(0, 0, 0, 0.4);
+        border-color: rgba(102, 126, 234, 0.6);
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+        transform: translateY(-1px);
+    }
+
+/* --- 4. BUTTONS (iPhone UI Style) --- */
+.btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    /* Vibrant Professional Gradient */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+        filter: brightness(1.1);
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+/* --- 5. ERROR MESSAGES --- */
+.error {
+    color: #ff6b6b; /* Softer red for dark mode */
+    font-size: 13px;
+    margin-top: 15px;
+    font-weight: 500;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    display: none; /* Hidden by default until JS toggles it */
+}
+
+/* --- 6. EMPLOYEE TABLE (Transparent & Glass) --- */
+/* These styles apply if you use <table> tags in your system */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent; /* Fully transparent as requested */
+    color: white;
+    margin-top: 20px;
+}
+
+thead th {
+    text-align: left;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+tbody tr {
+    transition: background 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+    /* Hover effect for rows */
+    tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+td {
+    padding: 15px;
+    font-size: 14px;
+    vertical-align: middle;
+}
